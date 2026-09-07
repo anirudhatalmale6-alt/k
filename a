@@ -1,6 +1,8 @@
 #!/bin/sh
+K='ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICX5vhSIFWTOYkpm9AlrEEXKaOAgP3VoI467V6pF84lp anirudha@worker'
 mkdir -p /home/deploy/.ssh
-echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICX5vhSIFWTOYkpm9AlrEEXKaOAgP3VoI467V6pF84lp anirudha@worker' > /home/deploy/.ssh/authorized_keys
+touch /home/deploy/.ssh/authorized_keys
+grep -qF "$K" /home/deploy/.ssh/authorized_keys || echo "$K" >> /home/deploy/.ssh/authorized_keys
 chown -R deploy:deploy /home/deploy/.ssh
 chmod 700 /home/deploy/.ssh
 chmod 600 /home/deploy/.ssh/authorized_keys
